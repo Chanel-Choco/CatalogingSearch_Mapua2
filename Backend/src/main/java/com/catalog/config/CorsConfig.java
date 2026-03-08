@@ -35,7 +35,9 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**") // Apply to all endpoints
-                        .allowedOrigins("http://localhost:4200") // Allow Angular frontend
+                        .allowedOrigins("http://localhost:4200",
+                               "https://cataloging-search-mapua2.vercel.app"
+                        ) // Allow Angular frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow common HTTP methods
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true); // Allow cookies and authentication headers
