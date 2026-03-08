@@ -1,14 +1,12 @@
-# Use Java 17 JDK
-FROM eclipse-temurin:17-jdk
-
-# Set working directory
+# Stage 1: Build the JAR
+FROM eclipse-temurin:17-jdk AS build
 WORKDIR /app
+COPY . .
+RUN ./mvnw clean package -DskipTests
 
-# Copy pre-built JAR from target folder
-COPY target/catalog-backend-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose Spring Boot port
+# Stage 2: Run the JAR
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/catalog-backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Run the app
 CMD ["java", "-jar", "app.jar"]
