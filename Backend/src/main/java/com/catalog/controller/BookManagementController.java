@@ -26,8 +26,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "http://localhost:4200",
-        "https://cataloging-search-mapua2.vercel.app")
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "https://cataloging-search-mapua2.vercel.app"
+})
 public class BookManagementController {
 
     private final BookManagementService service;
