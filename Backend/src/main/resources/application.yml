@@ -5,44 +5,18 @@
 server:
   port: ${PORT:8080}
 
-
-# ======================================================
-# SPRING FRAMEWORK CONFIGURATION
-# ======================================================
-
 spring:
-
-  # ------------------------------------------------------
-  # DATABASE CONFIGURATION (PostgreSQL - Supabase)
-  # ------------------------------------------------------
-
-  datasource:
-    url: jdbc:postgresql://db.ivpgwpckihvlhjupbbtv.supabase.co:5432/postgres
-    username: postgres
-    password: Tal3FJZEdsSAxedw
-    driver-class-name: org.postgresql.Driver
-
-  # ------------------------------------------------------
-  # JPA / HIBERNATE CONFIGURATION
-  # ------------------------------------------------------
-  jpa:
-    hibernate:
-      # Use "update" so Hibernate auto-creates any missing tables
-      # (e.g. password_reset_tokens) without wiping existing data
-      ddl-auto: update
-
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-    show-sql: true
-
-    open-in-view: false
-
-
-# ======================================================
-# EXTERNAL API CONFIGURATION
-# ======================================================
+    datasource:
+      url: ${SPRING_DATASOURCE_URL}
+      username: ${SPRING_DATASOURCE_USERNAME}
+      password: ${SPRING_DATASOURCE_PASSWORD}
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+      open-in-view: false
 
 google:
-  books:
-    api:
-      key: AIzaSyDuzFo7iWZDQYkQIj38O9XOxYeQ3htiASY
+    books:
+      api:
+        key: ${GOOGLE_BOOKS_API_KEY}
