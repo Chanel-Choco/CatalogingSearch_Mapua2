@@ -3,8 +3,6 @@
 # ======================================================
 
 server:
-  # Port where the Spring Boot application runs
-  # Default Spring Boot port is 8080
   port: 8080
 
 
@@ -15,38 +13,28 @@ server:
 spring:
 
   # ------------------------------------------------------
-  # DATABASE CONFIGURATION (MySQL)
+  # DATABASE CONFIGURATION (PostgreSQL - Supabase)
   # ------------------------------------------------------
+
   datasource:
-    # JDBC connection URL
-    # - useSSL=false → disables SSL for local development
-    # - serverTimezone=Asia/Manila → ensures correct timestamp handling
-    url: jdbc:mysql://localhost:3306/catalog_db?useSSL=false&serverTimezone=Asia/Manila
-    
-    # Database credentials (should be secured in production)
-    username: root
-    password: password
+    url: jdbc:postgresql://db.ivpgwpckihvlhjupbbtv.supabase.co:5432/postgres
+    username: postgres
+    password: Tal3FJZEdsSAxedw
+    driver-class-name: org.postgresql.Driver
 
   # ------------------------------------------------------
   # JPA / HIBERNATE CONFIGURATION
   # ------------------------------------------------------
   jpa:
     hibernate:
-      # ddl-auto options:
-      # none        → no schema changes
-      # update      → auto update schema
-      # create      → create schema each run
-      # create-drop → create and drop on shutdown
-      #
-      # "none" is recommended for production environments
-      ddl-auto: none
+      # Use "update" so Hibernate auto-creates any missing tables
+      # (e.g. password_reset_tokens) without wiping existing data
+      ddl-auto: update
 
-    # Displays generated SQL queries in console
-    # Useful for debugging during development
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
     show-sql: true
 
-    # Disables Open Session In View pattern
-    # Recommended for better transaction control
     open-in-view: false
 
 
@@ -57,11 +45,4 @@ spring:
 google:
   books:
     api:
-      # Google Books API Key
-      # Used for accessing Google Books REST API
-      #
-      # SECURITY NOTE:
-      # In production, API keys should be:
-      # - Stored in environment variables
-      # - Or secured in external configuration server
-      key: AIzaSyDvj4twvyXRybrI8WEvssLs3fbi8lOV114
+      key: AIzaSyDuzFo7iWZDQYkQIj38O9XOxYeQ3htiASY
