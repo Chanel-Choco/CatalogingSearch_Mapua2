@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from '../../environments/environment'; //added this
+
 @Component({
   selector: 'app-account',
   standalone: true,
@@ -42,8 +44,9 @@ export class AccountComponent implements OnInit {
       this.errorMessage = "User not found. Please login again.";
       return;
     }
-
-    this.http.get(`http://localhost:8080/api/users/${userId}`)
+    
+    this.http.get(`${environment.apiUrl}/api/users/${userId}`)
+    //this.http.get(`http://localhost:8080/api/users/${userId}`)
       .subscribe({
         next: (data) => {
           this.user = data;
@@ -141,7 +144,8 @@ export class AccountComponent implements OnInit {
     }
 
     this.http.put(
-      `http://localhost:8080/api/users/${userId}/password`,
+      `${environment.apiUrl}/api/users/${userId}/password`,
+      //`http://localhost:8080/api/users/${userId}/password`,
       { password: this.newPassword },
       { responseType: 'text' }   // IMPORTANT FIX
     ).subscribe({

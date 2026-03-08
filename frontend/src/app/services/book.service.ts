@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 // Observable for asynchronous API handling
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment'; // added this
 /**
  * BookService
  * -----------
@@ -31,12 +32,14 @@ export class BookService {
   /**
    * Base URL for search-related endpoints
    */
-  private searchUrl = 'http://localhost:8080/api/search';
+  private searchUrl = `${environment.apiUrl}/api/search`;
+  //private searchUrl = 'http://localhost:8080/api/search';
 
   /**
    * Base URL for book-related endpoints
    */
-  private booksUrl = 'http://localhost:8080/api/books';
+  private booksUrl = `${environment.apiUrl}/api/books`;
+  //private booksUrl = 'http://localhost:8080/api/books';
 
   constructor(private http: HttpClient) {}
 

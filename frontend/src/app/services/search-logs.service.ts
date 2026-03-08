@@ -7,6 +7,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 // Observable for async handling of responses
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment'; //added this
+
+
 /**
  * SearchLog Interface
  * -------------------
@@ -45,7 +48,8 @@ export class SearchLogsService {
   /**
    * Base endpoint for book-related operations
    */
-  private baseUrl = 'http://localhost:8080/api/books';
+  private baseUrl = `${environment.apiUrl}/api/books`;
+  //private baseUrl = 'http://localhost:8080/api/books';
 
   constructor(private http: HttpClient) {}
 
