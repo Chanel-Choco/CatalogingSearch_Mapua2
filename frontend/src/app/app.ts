@@ -44,7 +44,9 @@ export class AppComponent {
         ];
 
         // Hide layout if route is public
-        this.showLayout = !publicRoutes.includes(currentUrl);
+        //this.showLayout = !publicRoutes.includes(currentUrl);
+        this.showLayout = !publicRoutes.some(route => currentUrl.startsWith(route));
+
       });
   }
 }
