@@ -6,17 +6,26 @@ server:
   port: ${PORT:8080}
 
 spring:
-    datasource:
-      url: ${SPRING_DATASOURCE_URL}
-      username: ${SPRING_DATASOURCE_USERNAME}
-      password: ${SPRING_DATASOURCE_PASSWORD}
-    jpa:
-      hibernate:
-        ddl-auto: update
-      show-sql: true
-      open-in-view: false
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
 
 google:
-    books:
-      api:
-        key: ${GOOGLE_BOOKS_API_KEY}
+  books:
+    api:
+      key: ${GOOGLE_BOOKS_API_KEY}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
