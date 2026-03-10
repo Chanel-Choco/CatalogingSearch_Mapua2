@@ -1,5 +1,43 @@
 <div class="page-wrapper">
 
+  <!-- ================= TOAST NOTIFICATION ================= -->
+  <div class="toast-container" *ngIf="showToast" [ngClass]="'toast-' + toastType">
+
+    <!-- Icon -->
+    <span class="toast-icon">
+
+      <!-- Spinner for checking/waking -->
+      <span *ngIf="serverStatus === 'checking' || serverStatus === 'waking'" class="toast-spinner"></span>
+
+      <!-- Checkmark for online -->
+      <svg *ngIf="serverStatus === 'online'"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+
+      <!-- X for offline -->
+      <svg *ngIf="serverStatus === 'offline'"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+
+    </span>
+
+    <span class="toast-text">{{ toastMessage }}</span>
+
+    <!-- Retry button if offline -->
+    <button *ngIf="serverStatus === 'offline'" class="toast-retry" (click)="checkBackendStatus()">
+      Retry
+    </button>
+
+    <!-- Close button -->
+    <button class="toast-close" (click)="showToast = false">✕</button>
+
+  </div>
+
   <div class="login-card">
 
     <!-- ================= HEADER ================= -->
@@ -30,6 +68,7 @@
         type="email"
         [(ngModel)]="email"
         placeholder="user@mymail.mapua.edu.ph"
+        [disabled]="isLoggingIn"
       />
     </div>
 
@@ -42,6 +81,7 @@
           [type]="showPassword ? 'text' : 'password'"
           [(ngModel)]="password"
           placeholder="Enter password"
+          [disabled]="isLoggingIn"
         />
 
         <button
@@ -82,8 +122,13 @@
     </div>
 
     <!-- ================= LOGIN BUTTON ================= -->
-    <button class="login-btn" (click)="login()">
-      Sign In
+    <button class="login-btn" (click)="login()" [disabled]="isLoggingIn">
+
+      <!-- Spinner while logging in -->
+      <span *ngIf="isLoggingIn" class="btn-spinner"></span>
+      <span *ngIf="isLoggingIn">Signing in...</span>
+      <span *ngIf="!isLoggingIn">Sign In</span>
+
     </button>
 
     <!-- ================= LINKS SECTION ================= -->
