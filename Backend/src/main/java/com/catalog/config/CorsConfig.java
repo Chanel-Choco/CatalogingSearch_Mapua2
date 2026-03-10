@@ -15,33 +15,4 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 
-    /**
-     * Defines global CORS configuration for the application.
-     *
-     * @return WebMvcConfigurer that customizes CORS mappings
-     */
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-
-        return new WebMvcConfigurer() {
-
-            /**
-             * Configures allowed origins, HTTP methods, and headers
-             * for cross-origin requests.
-             *
-             * @param registry CorsRegistry used to define mapping rules
-             */
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-
-                registry.addMapping("/**") // Apply to all endpoints
-                        .allowedOrigins("http://localhost:4200",
-                               "https://cataloging-search-mapua2.vercel.app"
-                        ) // Allow Angular frontend
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow common HTTP methods
-                        .allowedHeaders("*") // Allow all headers
-                        .allowCredentials(true); // Allow cookies and authentication headers
-            }
-        };
-    }
 }
