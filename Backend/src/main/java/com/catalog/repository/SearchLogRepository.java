@@ -62,24 +62,14 @@ public interface SearchLogRepository extends JpaRepository<SearchLog, Long> {
     List<SearchLog> findByBook_IsbnContainingOrderBySearchedAtDesc(String keyword);
 
     /**
-     * Deletes all search logs EXCEPT those related to pinned books.
-     *
-     * This ensures that logs of important (pinned) books
-     * are preserved even when clearing search history.
+     * Deletes all search logs.
      *
      * 🔥 Important:
      * - @Transactional is required because this modifies data.
      * - @Modifying tells Spring this is a DELETE operation.
-     * - Custom JPQL query ensures pinned book logs remain.
      */
     @Transactional
     @Modifying
-    @Query("""
-        DELETE FROM SearchLog s
-        WHERE NOT EXISTS (
-            SELECT p.id FROM PinnedBook p
-            WHERE p.book.id = s.book.id
-        )
-    """)
+    @Query("DELETE FROM SearchLog s")
     void deleteAllExceptPinned();
 }
