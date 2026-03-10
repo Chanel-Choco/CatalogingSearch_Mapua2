@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { environment } from '../../environments/environment'; //added this
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-account',
@@ -36,7 +36,6 @@ export class AccountComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-
     const userId = localStorage.getItem('userId');
 
     if (!userId) {
@@ -44,17 +43,26 @@ export class AccountComponent implements OnInit {
       this.errorMessage = "User not found. Please login again.";
       return;
     }
-    
+
+    this.loadUserInfo(userId, 3); // 3 retries
+  }
+
+  // ================= LOAD USER WITH RETRY =================
+  loadUserInfo(userId: string, retries: number): void {
     this.http.get(`${environment.apiUrl}/api/users/${userId}`)
-    //this.http.get(`http://localhost:8080/api/users/${userId}`)
       .subscribe({
         next: (data) => {
           this.user = data;
           this.loading = false;
         },
         error: () => {
-          this.loading = false;
-          this.errorMessage = "Failed to load account information.";
+          if (retries > 0) {
+            // Wait 2 seconds then retry
+            setTimeout(() => this.loadUserInfo(userId, retries - 1), 2000);
+          } else {
+            this.loading = false;
+            this.errorMessage = "Failed to load account information. Please refresh the page.";
+          }
         }
       });
   }
@@ -133,8 +141,7 @@ export class AccountComponent implements OnInit {
     }
 
     if (!this.isPasswordValid()) {
-      this.errorMessage =
-        "Password does not meet security requirements.";
+      this.errorMessage = "Password does not meet security requirements.";
       return;
     }
 
@@ -145,17 +152,12 @@ export class AccountComponent implements OnInit {
 
     this.http.put(
       `${environment.apiUrl}/api/users/${userId}/password`,
-      //`http://localhost:8080/api/users/${userId}/password`,
       { password: this.newPassword },
-      { responseType: 'text' }   // IMPORTANT FIX
+      { responseType: 'text' }
     ).subscribe({
       next: (response: string) => {
-
         this.successMessage = response;
-
         this.resetPasswordFields();
-
-        // Auto close password form after success
         this.showChangePassword = false;
       },
       error: () => {
