@@ -36,6 +36,7 @@ public class SecurityConfig {
         http
                 // Disables Cross-Site Request Forgery protection.
                 // Commonly disabled for REST APIs during development.
+                .cors(cors -> cors.configure(http))
                 .csrf(csrf -> csrf.disable())
 
                 // Configures authorization rules for HTTP requests.
