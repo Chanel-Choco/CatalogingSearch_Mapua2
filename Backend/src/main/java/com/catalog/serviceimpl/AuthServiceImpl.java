@@ -6,6 +6,7 @@ import com.catalog.entity.User;
 import com.catalog.repository.LoginHistoryRepository;
 import com.catalog.repository.UserRepository;
 import com.catalog.service.AuthService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,11 +14,14 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final LoginHistoryRepository loginHistoryRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthServiceImpl(UserRepository userRepository,
-                           LoginHistoryRepository loginHistoryRepository) {
+                           LoginHistoryRepository loginHistoryRepository,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.loginHistoryRepository = loginHistoryRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // ================= LOGIN =================
@@ -42,7 +46,8 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Account is disabled");
         }
 
-        if (!request.getPassword().equals(user.getPassword())) {
+        // BCrypt comparison (works for both hashed and plain text during migration)
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid email or password");
         }
 
@@ -84,7 +89,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword()); // plain text (prototype only)
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // BCrypt hash
         user.setIsActive(true);
 
         if (request.getRole() == null) {
@@ -112,7 +117,7 @@ public class AuthServiceImpl implements AuthService {
 
         validatePassword(request.getNewPassword());
 
-        user.setPassword(request.getNewPassword());
+        user.setPassword(passwordEncoder.encode(request.getNewPassword())); // BCrypt hash
         userRepository.save(user);
     }
 

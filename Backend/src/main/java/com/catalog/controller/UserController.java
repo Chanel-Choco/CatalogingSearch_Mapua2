@@ -2,6 +2,7 @@ package com.catalog.controller;
 
 import com.catalog.entity.User;
 import com.catalog.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * Constructor-based dependency injection of UserRepository.
@@ -26,10 +28,11 @@ public class UserController {
      * @param userRepository repository responsible for database operations
      *                       related to User entities
      */
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository,
+                          PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
     /**
      * Retrieves a user by their unique identifier.
      *
@@ -46,6 +49,10 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    /**
+     * Updates user password with BCrypt hashing.
+     * Endpoint: PUT /api/users/{id}/password
+     */
     @PutMapping("/{id}/password")
     public String updatePassword(
             @PathVariable Integer id,
@@ -56,7 +63,7 @@ public class UserController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        user.setPassword(newPassword); // plain text (for now)
+        user.setPassword(passwordEncoder.encode(newPassword)); // BCrypt hash
 
         userRepository.save(user);
 
