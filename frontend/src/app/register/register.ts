@@ -24,6 +24,7 @@ export class RegisterComponent {
   errorMessage: string = '';
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  isRegistering: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -73,7 +74,6 @@ export class RegisterComponent {
     return this.password === this.confirmPassword;
   }
 
-  // Optional helper (if you want to highlight confirm field)
   isConfirmInvalid(): boolean {
     return this.confirmPassword.length > 0 && !this.passwordsMatch();
   }
@@ -83,19 +83,18 @@ export class RegisterComponent {
 
     this.errorMessage = '';
 
-    // Password strength validation
     if (!this.isPasswordValid()) {
       this.errorMessage = "Password does not meet security requirements.";
       return;
     }
 
-    // Confirm password validation
     if (!this.passwordsMatch()) {
       this.errorMessage = "Passwords do not match.";
       return;
     }
 
-    // Backend call
+    this.isRegistering = true;
+
     this.authService.register(
       this.name,
       this.email,
@@ -103,9 +102,11 @@ export class RegisterComponent {
       this.role
     ).subscribe({
       next: () => {
+        this.isRegistering = false;
         this.router.navigate(['/']);
       },
       error: (error) => {
+        this.isRegistering = false;
         this.errorMessage =
           error.error?.message || 'Registration failed';
       }
