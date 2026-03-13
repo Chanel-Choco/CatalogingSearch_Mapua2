@@ -24,6 +24,13 @@ public class AuthServiceImpl implements AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // ================= EMAIL VALIDATION =================
+    private void validateMapuaEmail(String email) {
+        if (!email.endsWith("@mymail.mapua.edu.ph") && !email.endsWith("@mapua.edu.ph")) {
+            throw new RuntimeException("Only Mapúa emails are allowed");
+        }
+    }
+
     // ================= LOGIN =================
     @Override
     public LoginResponse login(LoginRequest request) {
@@ -34,9 +41,7 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Email and password are required");
         }
 
-        if (!request.getEmail().endsWith("@mymail.mapua.edu.ph")) {
-            throw new RuntimeException("Only Mapúa emails are allowed");
-        }
+        validateMapuaEmail(request.getEmail());
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() ->
@@ -46,7 +51,6 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Account is disabled");
         }
 
-        // BCrypt comparison (works for both hashed and plain text during migration)
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid email or password");
         }
@@ -76,9 +80,7 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("All fields are required");
         }
 
-        if (!request.getEmail().endsWith("@mymail.mapua.edu.ph")) {
-            throw new RuntimeException("Only Mapúa emails are allowed");
-        }
+        validateMapuaEmail(request.getEmail());
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new RuntimeException("Email already registered");
@@ -89,7 +91,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword())); // BCrypt hash
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setIsActive(true);
 
         if (request.getRole() == null) {
@@ -117,7 +119,7 @@ public class AuthServiceImpl implements AuthService {
 
         validatePassword(request.getNewPassword());
 
-        user.setPassword(passwordEncoder.encode(request.getNewPassword())); // BCrypt hash
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
     }
 
