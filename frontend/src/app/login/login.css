@@ -250,6 +250,22 @@
   text-decoration: underline;
 }
 
+/* ================= IMPORTANT DOCS LINK ================= */
+ 
+.important-docs-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #7B1E14;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+ 
+.important-docs-link:hover {
+  text-decoration: underline;
+}
+
 /* ================= TOAST NOTIFICATION ================= */
 
 .toast-container {
