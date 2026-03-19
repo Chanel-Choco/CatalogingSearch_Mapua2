@@ -1,0 +1,730 @@
+<div class="layout-container">
+  <div class="main-content">
+    <div class="content-wrapper">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <div class="header-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        </div>
+        <div class="header-text">
+          <h1>User Guide</h1>
+          <p>Everything you need to know about the Cataloging Search Resources Platform</p>
+        </div>
+      </div>
+
+      <!-- TAB NAV -->
+      <div class="tab-bar">
+        <button
+          *ngFor="let tab of tabs"
+          class="tab-btn"
+          [class.active]="activeTab === tab.id"
+          (click)="setTab(tab.id)">
+          <span class="tab-icon" [innerHTML]="tab.icon"></span>
+          {{ tab.label }}
+        </button>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div class="tab-content">
+
+        <!-- ======= MANUAL ======= -->
+        <div *ngIf="activeTab === 'manual'" class="manual-tab">
+
+          <div class="manual-banner">
+            <div class="manual-banner-text">
+              <h2>Cataloging Search Resources Platform</h2>
+              <p>User Manual &mdash; Mapúa University Library, Makati Campus</p>
+              <div class="manual-authors">Boado, Juliana &nbsp;&middot;&nbsp; Catihanan, Aaron &nbsp;&middot;&nbsp; Refulle, Liandro &nbsp;&middot;&nbsp; Veluz, Natalie &nbsp;&middot;&nbsp; Villamil, Prince</div>
+              <span class="manual-version">v1.0 &nbsp;|&nbsp; March 19, 2026 &nbsp;|&nbsp; ITS120L / BM3</span>
+            </div>
+            <a class="banner-drive-link" href="https://drive.google.com/drive/folders/1WaMm9XJdg9G8C6XGFRW_9_7NAOvP9Hbn" target="_blank">
+              <!-- <svg viewBox="0 0 24 24" class="drive-icon"><path d="M7.71 3.5L1.15 15l3.43 5.5h15.84L21 20.5 14.29 3.5H7.71zM14 13l-2 3.5L10 13l2-3.5 2 3.5zm-4.27-8h4.54L19.31 15h-3.43L14 13l-2 3.5L10 13 8.12 15H4.69L9.73 5z"/></svg> -->
+              <span class="drive-link-text">
+                <span class="drive-link-label">Complete Documentation</span>
+                <span class="drive-link-url">Google Drive — All Manuals &amp; Resources</span>
+              </span>
+              <svg viewBox="0 0 24 24" class="drive-arrow"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- SECTION 1 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">1</span><h3>System Overview</h3></div>
+            <p>The Cataloging Search Resources Platform is a web-based application for the Mapúa University Library (Makati Campus). It centralizes bibliographic searching, enabling librarians and student assistants to locate, review, and pin book records for efficient cataloging.</p>
+            <h4>1.1 What You Can Do</h4>
+            <ul class="manual-list">
+              <li>Search for books by ISBN, Title, or Author</li>
+              <li>Retrieve aggregated bibliographic metadata from multiple reliable sources</li>
+              <li>Pin records to the system database for cataloging reference</li>
+              <li>Edit and manage pinned bibliographic records</li>
+              <li>Monitor search activity through audit logs</li>
+            </ul>
+            <h4>1.2 Data Sources</h4>
+            <div class="source-grid">
+              <div class="source-chip loc">Library of Congress API<span>Primary authoritative source</span></div>
+              <div class="source-chip ol">Open Library API<span>Comprehensive book metadata</span></div>
+              <div class="source-chip gb">Google Books API<span>Summaries &amp; extra metadata</span></div>
+              <div class="source-chip cn">Cutter Number Logic<span>Automated author classification</span></div>
+            </div>
+            <h4>1.3 User Roles</h4>
+            <div class="role-table-wrap">
+              <table class="role-table">
+                <thead><tr><th>Feature / Action</th><th>Admin</th><th>Student Assistant</th></tr></thead>
+                <tbody>
+                  <tr><td>Search for books</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+                  <tr><td>Pin books to the database</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+                  <tr><td>View pinned records</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+                  <tr><td>Edit pinned records</td><td class="yes">&#10003;</td><td class="no">&#10007;</td></tr>
+                  <tr><td>View search logs</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+                  <tr><td>Delete individual search logs</td><td class="yes">&#10003;</td><td class="no">&#10007;</td></tr>
+                  <tr><td>Delete all search logs</td><td class="yes">&#10003;</td><td class="no">&#10007;</td></tr>
+                  <tr><td>Manage user accounts</td><td class="yes">&#10003;</td><td class="no">&#10007;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SECTION 2 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">2</span><h3>Getting Started</h3></div>
+            <h4>2.1 Accessing the System</h4>
+            <p>The platform is hosted online — no installation required.</p>
+            <div class="link-box"><span class="link-label">System URL</span><a href="https://cataloging-search-mapua2.vercel.app/login" target="_blank">https://cataloging-search-mapua2.vercel.app/login</a></div>
+            <div class="link-box"><span class="link-label">Backend Status</span><a href="https://catalogingsearch-mapua2.onrender.com/" target="_blank">https://catalogingsearch-mapua2.onrender.com/</a></div>
+            <h4>2.2 Logging In</h4>
+            <ol class="manual-steps">
+              <li>Go to the system URL in your web browser.</li>
+              <li>Enter your registered Mapúa email address and password.</li>
+              <li>Click <strong>Login</strong>. You will be directed to the Home page.</li>
+            </ol>
+            <div class="callout warning"><strong>Backend Server Notice:</strong> Before logging in, ensure the backend server is active. A notification on the bottom-right of the page shows connection status. The server uses Render's free tier and may take <strong>3–15 minutes</strong> to wake up when inactive. If the login page loads but nothing responds, wait a few minutes and try again.</div>
+            <h4>2.3 Connection Notifications</h4>
+            <div class="role-table-wrap">
+              <table class="role-table">
+                <thead><tr><th>Notification</th><th>Meaning</th><th>What to Do</th></tr></thead>
+                <tbody>
+                  <tr><td>Connecting to server…</td><td>Attempting to reach the backend</td><td>Wait — this is normal startup.</td></tr>
+                  <tr><td>Server is waking up, please wait…</td><td>Backend is restarting from sleep</td><td>Do not refresh the page.</td></tr>
+                  <tr><td>Cannot reach server. Please try again later.</td><td>Server failed to respond in time</td><td>Click Retry. If it continues, wait a few minutes.</td></tr>
+                  <tr><td>Connected successfully</td><td>Backend is active and ready</td><td>You may now log in.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>2.4 Default Test Accounts</h4>
+            <div class="cred-box">
+              <div class="cred-row"><span class="cred-label admin-badge">Admin</span><code>admin@mymail.mapua.edu.ph</code><span class="cred-sep">·</span><code>Admin123456789.</code></div>
+              <div class="cred-row"><span class="cred-label asst-badge">Student Assistant</span><code>assistant@mymail.mapua.edu.ph</code><span class="cred-sep">·</span><code>Assistant123456789.</code></div>
+            </div>
+            <h4>2.5 Logging Out</h4>
+            <p>Click the <strong>Logout</strong> button at the bottom-left of the navigation bar, then confirm the logout prompt.</p>
+          </div>
+
+          <!-- SECTION 3 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">3</span><h3>Searching for Books</h3></div>
+            <p>The Home page is your primary workspace. The system supports partial matching — you do not need a complete title or full author name.</p>
+            <h4>3.1 Search Methods</h4>
+            <div class="method-grid">
+              <div class="method-card"><span class="method-label">ISBN</span><p>Enter a 10- or 13-digit ISBN. Best for identifying a specific edition.</p></div>
+              <div class="method-card"><span class="method-label">Title</span><p>Enter part or all of a book title. Partial matching is supported.</p></div>
+              <div class="method-card"><span class="method-label">Author</span><p>Enter a full or partial author name to retrieve all books by that author.</p></div>
+            </div>
+            <h4>3.2 How to Search</h4>
+            <ol class="manual-steps">
+              <li>Select your preferred search method (ISBN, Title, or Author).</li>
+              <li>Type your keyword into the search field.</li>
+              <li>Click <strong>Search</strong> or press Enter.</li>
+              <li>Wait for results — the system queries all sources simultaneously.</li>
+              <li>Browse result cards showing title, author, publisher, year, and summary.</li>
+            </ol>
+            <h4>3.3 Understanding Results</h4>
+            <ul class="manual-list">
+              <li>Multiple entries for the same book may appear from different sources.</li>
+              <li>Detail level varies depending on which source returned the record.</li>
+              <li>A Cutter Number is automatically generated for classification.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 4 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">4</span><h3>Pinning a Book Record</h3></div>
+            <p>Pinning saves a bibliographic record into the database, making it available in Pinned Books for cataloging reference and further editing.</p>
+            <ol class="manual-steps">
+              <li>Search for a book using the Home page.</li>
+              <li>Click the <strong>Pin</strong> button on the desired result card.</li>
+              <li>A confirmation message will appear — the record is now saved.</li>
+              <li>Access it anytime from the <strong>Pinned Books</strong> page.</li>
+            </ol>
+            <div class="callout info"><strong>Note:</strong> Both Admin and Student Assistant roles can pin records.</div>
+          </div>
+
+          <!-- SECTION 5 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">5</span><h3>Pinned Books</h3></div>
+            <h4>5.1 Viewing Pinned Records</h4>
+            <ol class="manual-steps">
+              <li>Navigate to <strong>Pinned Books</strong> from the sidebar.</li>
+              <li>All saved records are displayed — click any to view full details.</li>
+            </ol>
+            <h4>5.2 Editing a Pinned Record (Admin only)</h4>
+            <ol class="manual-steps">
+              <li>Go to <strong>Pinned Books</strong> and find the record to update.</li>
+              <li>Click <strong>Edit</strong>, modify the fields, then click <strong>Save</strong>.</li>
+              <li>A confirmation appears and the audit log updates automatically.</li>
+            </ol>
+          </div>
+
+          <!-- SECTION 6 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">6</span><h3>Search Logs</h3></div>
+            <p>Navigate to <strong>Search Logs</strong> from the sidebar to view all recorded queries including search term, type, date, and user who performed the search.</p>
+            <h4>6.1 Deleting Logs (Admin only)</h4>
+            <div class="two-col">
+              <div class="mini-card"><strong>Delete a single entry</strong><ol class="manual-steps"><li>Click <strong>Delete</strong> next to the entry.</li><li>Confirm when prompted.</li></ol></div>
+              <div class="mini-card"><strong>Delete all entries</strong><ol class="manual-steps"><li>Click <strong>Delete All</strong> at the top.</li><li>Confirm the action.</li></ol></div>
+            </div>
+            <div class="callout info"><strong>Note:</strong> Deleting logs does not affect pinned records — they are stored separately.</div>
+          </div>
+
+          <!-- SECTION 7 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">7</span><h3>Manage Account</h3></div>
+            <h4>7.1 Viewing Account Details</h4>
+            <p>Navigate to <strong>Manage Account</strong> from the sidebar. Your Name, Email, and Role are displayed as read-only fields.</p>
+            <h4>7.2 Changing Your Password</h4>
+            <ol class="manual-steps">
+              <li>Click <strong>Change Password</strong> on the Manage Account page.</li>
+              <li>Enter your new password in <strong>New Password</strong> and confirm it.</li>
+              <li>Click <strong>Update Password</strong> to save, or <strong>Cancel</strong> to discard.</li>
+            </ol>
+          </div>
+
+          <!-- SECTION 8 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">8</span><h3>Troubleshooting</h3></div>
+            <div class="role-table-wrap">
+              <table class="role-table">
+                <thead><tr><th>Issue</th><th>What to Do</th></tr></thead>
+                <tbody>
+                  <tr><td>Cannot log in</td><td>Verify your email and password. Ensure your account has been activated.</td></tr>
+                  <tr><td>Search returns no results</td><td>Try a broader keyword or switch search type. Check your internet connection.</td></tr>
+                  <tr><td>Page does not load</td><td>Refresh the browser. Clear cache and try again.</td></tr>
+                  <tr><td>Pin button not working</td><td>Ensure you are logged in. Refresh and search again before pinning.</td></tr>
+                  <tr><td>Edits not saving</td><td>Confirm your role has edit permissions. Check your connection.</td></tr>
+                  <tr><td>Slow search results</td><td>External API response times vary. Avoid multiple simultaneous searches.</td></tr>
+                  <tr><td>Backend not connecting</td><td>Visit the backend URL. It may take 3–15 minutes to wake from sleep on Render's free tier.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SECTION 9 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">9</span><h3>System Limitations</h3></div>
+            <ul class="manual-list">
+              <li><strong>Authentication:</strong> User accounts must be manually created by an administrator. Mapúa SSO integration is not yet implemented.</li>
+              <li><strong>Desktop-Optimized:</strong> Designed for desktop browsers. Mobile responsiveness is limited.</li>
+              <li><strong>No Borrowing Integration:</strong> Focuses solely on bibliographic search and cataloging — no borrowing or return management.</li>
+              <li><strong>API Availability:</strong> Search results depend on third-party APIs. Provider outages may temporarily affect functionality.</li>
+            </ul>
+          </div>
+
+        </div>
+
+
+        <!-- ======= TECHNICAL MANUAL 1 ======= -->
+        <div *ngIf="activeTab === 'tech-manual-1'" class="manual-tab">
+
+          <div class="manual-banner">
+            <div class="manual-banner-text">
+              <h2>Technical Manual 1</h2>
+              <p>Requirements Gathering and Requirements Analysis &mdash; Mapúa University Library, Makati Campus</p>
+              <div class="manual-authors">Boado, Juliana &nbsp;&middot;&nbsp; Catihanan, Aaron &nbsp;&middot;&nbsp; Refulle, Liandro &nbsp;&middot;&nbsp; Veluz, Natalie &nbsp;&middot;&nbsp; Villamil, Prince</div>
+              <span class="manual-version">ITS120L / BM3 &nbsp;|&nbsp; March 19, 2026 &nbsp;|&nbsp; Group Task 7</span>
+            </div>
+            <a class="banner-drive-link" href="https://drive.google.com/drive/folders/1WaMm9XJdg9G8C6XGFRW_9_7NAOvP9Hbn" target="_blank">
+              <!-- <svg viewBox="0 0 24 24" class="drive-icon"><path d="M7.71 3.5L1.15 15l3.43 5.5h15.84L21 20.5 14.29 3.5H7.71zM14 13l-2 3.5L10 13l2-3.5 2 3.5zm-4.27-8h4.54L19.31 15h-3.43L14 13l-2 3.5L10 13 8.12 15H4.69L9.73 5z"/></svg> -->
+              <span class="drive-link-text">
+                <span class="drive-link-label">Complete Documentation</span>
+                <span class="drive-link-url">Google Drive — All Manuals &amp; Resources</span>
+              </span>
+              <svg viewBox="0 0 24 24" class="drive-arrow"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- SECTION 1 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">1</span><h3>System Overview</h3></div>
+            <h4>Current Situation and Challenges</h4>
+            <p>The University Library currently uses an existing cataloging system (Ex-Libris) to retrieve book information using the ISBN or title of a book. Although the system is in place, it does not always successfully identify or display complete book information. In some cases, entering the ISBN or title returns no results or only shows partial details.</p>
+            <p>Because of these limitations, library staff must search multiple external sources and open several tabs to gather missing information such as book summaries, content notes, LCCN, and author cutter numbers — making the cataloging process time-consuming and inefficient.</p>
+            <h4>Why This Platform Is Needed</h4>
+            <p>The system will serve as a centralized information-finding platform where all required bibliographic data can be accessed in one place. Instead of manually searching across different websites, the system retrieves and presents book information using a single search based on ISBN, title, or author — allowing library staff to copy accurate and complete information into the existing library backend without switching between multiple sources.</p>
+            <h4>High-Level Objectives</h4>
+            <ol class="manual-steps">
+              <li>Provide accurate and complete book information using ISBN, title, or author search.</li>
+              <li>Centralize book information retrieval from multiple trusted external sources.</li>
+              <li>Reduce the time and effort required to search for book details.</li>
+              <li>Improve accuracy and consistency of cataloged book information.</li>
+              <li>Support the growing library collection as new courses and materials are added.</li>
+              <li>Offer a user-friendly, desktop-based interface aligned with the Mapúa Library website design.</li>
+            </ol>
+          </div>
+
+          <!-- SECTION 2 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">2</span><h3>Stakeholder Identification</h3></div>
+
+            <div class="stakeholder-grid">
+              <div class="stakeholder-card">
+                <div class="stakeholder-header lib">Librarians</div>
+                <p>Responsible for cataloging library materials, managing bibliographic records, and ensuring accurate book information is entered into Ex-Libris (Ms. Carla Rosario). Their main concern is search reliability and accuracy.</p>
+              </div>
+              <div class="stakeholder-card">
+                <div class="stakeholder-header sa">Student Assistants</div>
+                <p>Support librarians by searching and gathering bibliographic information. Their primary concern is ease of use and avoiding mistakes when copying data. Expect partial matches and role-based access restrictions.</p>
+              </div>
+              <div class="stakeholder-card">
+                <div class="stakeholder-header fac">Faculty Members</div>
+                <p>Indirect stakeholders who rely on accurate and timely availability of library materials to support teaching and research. Concerned that inaccurate cataloging may affect access to learning resources.</p>
+              </div>
+              <div class="stakeholder-card">
+                <div class="stakeholder-header adm">Library Administrators</div>
+                <p>Oversee library operations, policies, and long-term planning. Expect system sustainability, scalability, and alignment with institutional standards including Mapúa email authentication.</p>
+              </div>
+              <div class="stakeholder-card">
+                <div class="stakeholder-header it">University IT Staff</div>
+                <p>Provide technical support, system maintenance, security, and integration. Concerned with security, maintainability, and compatibility with current IT infrastructure.</p>
+              </div>
+              <div class="stakeholder-card">
+                <div class="stakeholder-header ext">External Data Providers</div>
+                <p>Platforms such as Library of Congress, WorldCat, Amazon Books, Goodreads, and Cutternumber. Their concern is data availability and consistency, as system accuracy depends on these sources.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">3</span><h3>Requirements Gathering</h3></div>
+            <p>Requirements were gathered primarily through an interview with the client. A permission letter was sent on <strong>January 12, 2026</strong> to request approval to conduct an interview with Ms. Carla Rosario (head cataloger). The interview was conducted on <strong>January 15, 2026</strong> and was recorded with permission. The team also observed the current system, took pictures, and wrote notes.</p>
+            <h4>Gathered Raw Requirements</h4>
+            <ol class="manual-steps">
+              <li>The system must allow searching by ISBN, book title, and author name, with support for partial matches.</li>
+              <li>Entering an ISBN or title should display complete book information in one place.</li>
+              <li>The system should include both physical books and e-books.</li>
+              <li>Each book record should contain ISBN, title, author name, Cutter Number, LCCN, summary, and content notes (if available).</li>
+              <li>Book information should be retrieved from Library of Congress, WorldCat, Amazon Books, Goodreads, and a Cutter Number website.</li>
+              <li>Only library staff and student assistants are allowed to use the system.</li>
+              <li>Users must log in using their myMapúa email, with Admin and Student Assistant access levels.</li>
+              <li>The system should be easy to use, follow the Mapúa Library website design, and be used on desktop computers only.</li>
+              <li>The system should be fast and accurate, and support automatic backup and future system integration.</li>
+              <li>Reports and analytics are not required. The system is considered successful if it meets Ms. Rosario's requirements.</li>
+            </ol>
+          </div>
+
+          <!-- SECTION 4 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">4</span><h3>Requirements Analysis</h3></div>
+            <h4>4a. Functional Requirements</h4>
+
+            <div class="req-group">
+              <div class="req-label">Authentication &amp; Access</div>
+              <ul class="manual-list">
+                <li><strong>FR-1.1:</strong> The system shall authenticate users via official Mapúa email to restrict access to authorized staff and student assistants only.</li>
+                <li><strong>FR-1.2:</strong> The system shall differentiate between Admin (Ms. Rosario) and User (Student Assistant and Staff) roles to control access to sensitive logs.</li>
+              </ul>
+            </div>
+
+            <div class="req-group">
+              <div class="req-label">Metadata Retrieval and Consolidation</div>
+              <ul class="manual-list">
+                <li><strong>FR-2.1:</strong> The system shall allow users to search for book information using an ISBN, Title, or Author.</li>
+                <li><strong>FR-2.2:</strong> The system shall support partial matches and keyword searches for titles and authors.</li>
+                <li><strong>FR-2.3:</strong> The system shall automatically fetch metadata (Title, Author, Author Number, LCCN, Summary, and Content Notes) from integrated sources and display them on a single results page.</li>
+              </ul>
+            </div>
+
+            <div class="req-group">
+              <div class="req-label">Record Management (Create, Update, Delete)</div>
+              <ul class="manual-list">
+                <li><strong>FR-3.1:</strong> The system shall allow users to "Pin" (save) fetched book information into the local database for future reference.</li>
+                <li><strong>FR-3.2:</strong> The system shall allow users to manually edit any field of a pinned book to ensure data accuracy.</li>
+                <li><strong>FR-3.3:</strong> The system shall allow users to remove (unpin) book records from the local repository.</li>
+              </ul>
+            </div>
+
+            <div class="req-group">
+              <div class="req-label">Administrative Audit and Logs</div>
+              <ul class="manual-list">
+                <li><strong>FR-4.1:</strong> The system shall automatically record a History Log of every search, including the query, user ID, and timestamp.</li>
+                <li><strong>FR-4.2:</strong> The system shall allow the Admin to view and delete search history logs through a private dashboard.</li>
+              </ul>
+            </div>
+
+            <h4>4b. Non-Functional Requirements</h4>
+            <div class="nfr-grid">
+              <div class="nfr-card"><strong>Security</strong><p>Secure database for Mapúa email verification. Admin Dashboard and global logs must be inaccessible to Student Assistant accounts.</p></div>
+              <div class="nfr-card"><strong>Availability</strong><p>Web-based desktop tool accessible both within the Mapúa campus network and via remote login from home.</p></div>
+              <div class="nfr-card"><strong>Performance</strong><p>Retrieve and display metadata from external APIs within 5 seconds per query. Local database must retrieve Pinned Books in under 1 second.</p></div>
+              <div class="nfr-card"><strong>Usability</strong><p>UI must follow the Mapúa Library website color scheme and layout. Optimized for desktop screen resolutions to allow efficient copy-pasting of large text blocks.</p></div>
+            </div>
+          </div>
+
+          <!-- SECTION 5 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">5</span><h3>Scope of the System</h3></div>
+            <div class="two-col">
+              <div class="scope-card included">
+                <div class="scope-label in">Will Include</div>
+                <ul class="manual-list">
+                  <li>Book search by ISBN, Title, and Author (partial matches supported)</li>
+                  <li>Bibliographic information retrieval: title, creator, subjects, ISBN, ISSN, publication year, material type</li>
+                  <li>Integration with Library of Congress, WorldCat, Amazon Books, Goodreads, and Cutter Number database</li>
+                  <li>User account management with Admin and Student Assistant roles</li>
+                  <li>Mapúa email-based authentication</li>
+                  <li>Desktop-only interface aligned with Mapúa Library design</li>
+                  <li>Optional automatic backups and basic data recovery</li>
+                </ul>
+              </div>
+              <div class="scope-card excluded">
+                <div class="scope-label out">Will Not Include</div>
+                <ul class="manual-list">
+                  <li>Book borrowing, returning, or renewal processes</li>
+                  <li>Overdue notifications or fine computation</li>
+                  <li>Inventory management and auditing</li>
+                  <li>Statistical reports on library usage</li>
+                </ul>
+                <div class="callout info" style="margin-top:12px;"><strong>Note:</strong> The system is strictly a support tool for cataloging — not a full Library Management Information System (LMIS).</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 6 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">6</span><h3>Limitations of the System</h3></div>
+            <ul class="manual-list">
+              <li><strong>Circulation and Borrowing Management:</strong> The system will not track book loans, returns, or borrowing history.</li>
+              <li><strong>Mobile Application Support:</strong> The system is optimized for desktop environments only, as requested by the client for heavy data entry and copy-paste workflows.</li>
+              <li><strong>Physical Book Digitization:</strong> No features for scanning physical pages or OCR. Relies entirely on existing digital metadata from external APIs.</li>
+              <li><strong>Online Payment Processing:</strong> No functionality for handling library fines, fees, or financial transactions.</li>
+              <li><strong>Real-time Inventory Tracking:</strong> The system will not reflect real-time book availability (e.g., "On Shelf" or "Checked Out").</li>
+              <li><strong>Public Access:</strong> Restricted to library staff and student assistants — not accessible to the general student body or faculty.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 7 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">7</span><h3>System Constraints</h3></div>
+            <div class="nfr-grid">
+              <div class="nfr-card"><strong>Time Constraint</strong><p>System development is bound by a fixed academic deadline for analysis, design, and presentation.</p></div>
+              <div class="nfr-card"><strong>Budget Constraint</strong><p>Project operates under limited funding, restricting access to paid APIs, premium databases, or advanced software tools.</p></div>
+              <div class="nfr-card"><strong>Technical Constraint</strong><p>Must be compatible with existing university infrastructure including Ex-Libris and available hardware/software environments.</p></div>
+              <div class="nfr-card"><strong>Policy &amp; Regulatory</strong><p>Must comply with university policies, copyright rules, and data privacy regulations.</p></div>
+              <div class="nfr-card"><strong>Data Source Reliability</strong><p>Depends on external bibliographic sources which may vary in availability, accuracy, and completeness.</p></div>
+              <div class="nfr-card"><strong>User Skill Constraint</strong><p>Library staff may have varying levels of technical proficiency.</p></div>
+            </div>
+          </div>
+
+          <!-- SECTION 8 -->
+
+        </div>
+
+        <!-- ======= TECHNICAL MANUAL 2 ======= -->
+        <div *ngIf="activeTab === 'tech-manual-2'" class="manual-tab">
+
+          <div class="manual-banner">
+            <div class="manual-banner-text">
+              <h2>Technical Manual 2</h2>
+              <p>System Design &mdash; Mapúa University Library, Makati Campus</p>
+              <div class="manual-authors">Boado, Juliana &nbsp;&middot;&nbsp; Catihanan, Aaron &nbsp;&middot;&nbsp; Refulle, Liandro &nbsp;&middot;&nbsp; Veluz, Natalie &nbsp;&middot;&nbsp; Villamil, Prince</div>
+              <span class="manual-version">ITS120L / BM3 &nbsp;|&nbsp; March 19, 2026 &nbsp;|&nbsp; Group Task 2</span>
+            </div>
+            <a class="banner-drive-link" href="https://drive.google.com/drive/folders/1WaMm9XJdg9G8C6XGFRW_9_7NAOvP9Hbn" target="_blank">
+              <!-- <svg viewBox="0 0 24 24" class="drive-icon"><path d="M7.71 3.5L1.15 15l3.43 5.5h15.84L21 20.5 14.29 3.5H7.71zM14 13l-2 3.5L10 13l2-3.5 2 3.5zm-4.27-8h4.54L19.31 15h-3.43L14 13l-2 3.5L10 13 8.12 15H4.69L9.73 5z"/></svg> -->
+              <span class="drive-link-text">
+                <span class="drive-link-label">Complete Documentation</span>
+                <span class="drive-link-url">Google Drive — All Manuals &amp; Resources</span>
+              </span>
+              <svg viewBox="0 0 24 24" class="drive-arrow"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- SECTION 1 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">1</span><h3>Design Overview</h3></div>
+            <p>The Cataloging Search Resources Pages/Platform is a centralized bibliographic data retrieval system designed to streamline the cataloging process by aggregating book metadata from multiple external sources into a single interface — eliminating the inefficiency of manual, multi-tab searching.</p>
+            <div class="source-grid">
+              <div class="source-chip loc">Centralized Metadata Retrieval<span>Single-query search via ISBN, Title, or Author</span></div>
+              <div class="source-chip ol">Multi-Source Aggregation<span>LOC, WorldCat, Amazon, Goodreads, Cutter Number</span></div>
+              <div class="source-chip gb">Role-Based Access Control<span>Student Assistant view vs. full Admin view</span></div>
+              <div class="source-chip cn">Pin and Edit Staging Area<span>Save and edit records before entry into Ex-Libris</span></div>
+            </div>
+
+            <h4>Core Design Goals</h4>
+            <div class="nfr-grid">
+              <div class="nfr-card"><strong>Efficiency</strong><p>Retrieve complete book details in under 15 seconds per query. Desktop-optimized for heavy text manipulation and copy-pasting workflows.</p></div>
+              <div class="nfr-card"><strong>Visual Consistency</strong><p>Interface aligned with the existing Mapúa Library website design to minimize the learning curve.</p></div>
+              <div class="nfr-card"><strong>API Modularity</strong><p>Each external data source connection is isolated so changes in one platform do not disrupt the entire system.</p></div>
+              <div class="nfr-card"><strong>Security &amp; Reliability</strong><p>Critical functions strictly limited to the Admin role. System degrades gracefully — if one source is offline, others continue.</p></div>
+            </div>
+
+            <h4>Design Assumptions</h4>
+            <ul class="manual-list">
+              <li>The system will be accessed exclusively via desktop computers within the library or authorized remote workstations.</li>
+              <li>A stable internet connection is available to fetch real-time data from external APIs.</li>
+              <li>The system acts as a supplement to Ex-Libris, not a replacement — no borrowing or financial data will be processed.</li>
+              <li>Users possess the technical literacy to interpret bibliographic data and manage clipboard operations (copy-paste).</li>
+              <li>The "Pinning" feature is intended for temporary reference during the cataloging shift, not for permanent long-term archival.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 2 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">2</span><h3>System Architecture Design</h3></div>
+
+            <h4>2.1 Selected Architecture Type</h4>
+            <p>The system uses a <strong>layered client-server architecture</strong> with a web-based deployment model. It is layered because it separates concerns into presentation, application, and data layers to improve maintainability, scalability, and security.</p>
+
+            <h4>2.2 System Components and Layers</h4>
+            <div class="arch-diagram">
+              <div class="arch-layer frontend">
+                <span class="layer-label">Presentation Layer</span>
+                <div class="arch-items"><span>Angular</span><span>Book Search UI</span><span>Results Display</span><span>Error Handling</span></div>
+              </div>
+              <div class="arch-arrow">↕ REST API (HTTP)</div>
+              <div class="arch-layer backend">
+                <span class="layer-label">Application Layer</span>
+                <div class="arch-items"><span>Spring Boot</span><span>API Orchestration</span><span>Cutter Number Logic</span><span>Web Scraping Fallback</span></div>
+              </div>
+              <div class="arch-arrow">↕ JPA / Hibernate</div>
+              <div class="arch-layer database">
+                <span class="layer-label">Data Layer</span>
+                <div class="arch-items"><span>MySQL</span><span>Pinned Books</span><span>Search Logs</span><span>User Accounts</span></div>
+              </div>
+            </div>
+
+            <h4>2.3 Deployment Overview</h4>
+            <div class="deploy-flow">
+              <div class="deploy-node user-node">User (Web Browser)<span>Types ISBN, title, or author</span></div>
+              <div class="deploy-arrow">↓</div>
+              <div class="deploy-node fe-node">Frontend (Angular)<span>Sends search request via REST API</span></div>
+              <div class="deploy-arrow">↕</div>
+              <div class="deploy-node be-node">Backend (Spring Boot)<span>Fetches from APIs, computes Cutter Number, returns organized data</span></div>
+              <div class="deploy-arrow">↕</div>
+              <div class="deploy-node db-node">Database (MySQL)<span>Stores and retrieves book info quickly</span></div>
+            </div>
+
+
+            <h4>2.4 Justification of Architectural Decisions</h4>
+            <p>The system integrates with multiple trusted sources — Library of Congress (primary), WorldCat, Amazon Books, and Goodreads — using APIs to automatically fetch key book data. LOC is prioritized as the primary source since it contains most of the information needed, while Amazon and Goodreads provide summaries and content notes. In cases where API data is unavailable, the system can perform web scraping (in compliance with each site's terms of service). All collected data is organized in a MySQL database and presented via an Angular web interface.</p>
+          </div>
+
+          <!-- SECTION 3 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">3</span><h3>System Modules and Functional Decomposition</h3></div>
+
+            <div class="module-grid">
+              <div class="module-card">
+                <div class="module-num">3.1</div>
+                <div class="module-content">
+                  <strong>User Management &amp; Authentication Module</strong>
+                  <p>Validates user identity via official Mapúa email. Enforces RBAC to differentiate between Admins (Librarians) and Users (Student Assistants). Acts as gatekeeper for the Cataloging Workspace Module.</p>
+                  <div class="module-users"><span>Admin</span><span>Student Assistant</span></div>
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">3.2</div>
+                <div class="module-content">
+                  <strong>Search and Aggregation Module (Core Engine)</strong>
+                  <p>Accepts search queries via ISBN, Title, or Author. Orchestrates retrieval from external APIs in prioritized order: Library of Congress → WorldCat → Amazon → Goodreads. Handles web scraping fallbacks and computes Cutter Numbers.</p>
+                  <div class="module-users"><span>Librarian</span><span>Student Assistant</span></div>
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">3.3</div>
+                <div class="module-content">
+                  <strong>Cataloging Workspace (Staging) Module</strong>
+                  <p>Displays consolidated search results in a unified view. Allows users to "Pin" (save) records to the local database and manually edit fields before entering data into Ex-Libris. Allows unpinning (deleting) of records.</p>
+                  <div class="module-users"><span>Librarian</span><span>Student Assistant</span></div>
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">3.4</div>
+                <div class="module-content">
+                  <strong>Administrative Audit Module</strong>
+                  <p>Automatically records a History Log of every search including the query, user ID, and timestamp. Provides a dashboard for the Admin to view and delete search history logs. Ensures accountability for Student Assistant usage.</p>
+                  <div class="module-users"><span>Admin Only</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">4</span><h3>Data Design</h3></div>
+            <p>The data design uses a normalized relational database structure, separating core book data from extensive metadata and author details to ensure data integrity and scalability.</p>
+
+            <h4>4.1 Major Entities and Key Attributes</h4>
+            <div class="entity-grid">
+              <div class="entity-card"><strong>User</strong><ul class="manual-list"><li>user_id (PK), mymapua_email, full_name, role (Admin/StudentAssistant), created_at</li></ul></div>
+              <div class="entity-card"><strong>Book</strong><ul class="manual-list"><li>book_id (PK), isbn, title, publication_year, publisher, material_type, series, format</li></ul></div>
+              <div class="entity-card"><strong>Author</strong><ul class="manual-list"><li>author_id (PK), author_name, cutter_number</li></ul></div>
+              <div class="entity-card"><strong>Book_Author</strong><ul class="manual-list"><li>bridge_id (PK), book_id (FK), author_id (FK) — Many-to-Many bridge</li></ul></div>
+              <div class="entity-card"><strong>Bibliographic_Metadata</strong><ul class="manual-list"><li>metadata_id (PK), book_id (FK), lccn, summary, content_notes, subjects, source, retrieved_at</li></ul></div>
+              <div class="entity-card"><strong>Pinned_Book</strong><ul class="manual-list"><li>pinned_id (PK), book_id (FK), pinned_by_user_id (FK), pinned_at, status (Pending/Reviewed/Ready_For_Export)</li></ul></div>
+              <div class="entity-card"><strong>Search_Log</strong><ul class="manual-list"><li>log_id (PK), query, performed_by_user_id (FK), timestamp, target_isbn</li></ul></div>
+              <div class="entity-card"><strong>Record_Activity</strong><ul class="manual-list"><li>activity_id (PK), action_type (PIN/UNPIN/DELETE/VIEW), book_id (FK), executed_by_user_id (FK), timestamp</li></ul></div>
+            </div>
+
+            <h4>4.2 Relationships</h4>
+            <ul class="manual-list">
+              <li><strong>User → Pinned_Book (1:M):</strong> A single user manages many pinned books (the staging workspace).</li>
+              <li><strong>Book → Pinned_Book (1:M):</strong> A book can be pinned by multiple users working collaboratively.</li>
+              <li><strong>Book → Bibliographic_Metadata (1:1):</strong> Each book has detailed metadata linked to it, keeping the Book table light and fast.</li>
+              <li><strong>Book ↔ Author (M:M via Book_Author):</strong> A book can have multiple authors; an author can write multiple books.</li>
+              <li><strong>User → Search_Log (1:M):</strong> Tracks all search queries generated by a user.</li>
+              <li><strong>User → Record_Activity (1:M):</strong> Tracks every specific interaction (Pinning, Deleting) a user performs.</li>
+              <li><strong>Book → Record_Activity (1:M):</strong> Tracks the history of a specific book record.</li>
+            </ul>
+
+
+          </div>
+
+          <!-- SECTION 5 -->
+
+          <!-- SECTION 6 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">5</span><h3>Interface Design (Conceptual)</h3></div>
+
+            <h4>5.1 Interface Design Principles</h4>
+            <div class="nfr-grid">
+              <div class="nfr-card"><strong>Simplicity</strong><p>Only important information is shown on each screen to avoid confusion.</p></div>
+              <div class="nfr-card"><strong>Consistency</strong><p>Buttons, menus, and layouts look the same on all pages.</p></div>
+              <div class="nfr-card"><strong>Clarity &amp; Readability</strong><p>Labels and text are clear and easy to read, making it easier to copy book details.</p></div>
+              <div class="nfr-card"><strong>Feedback &amp; Visibility</strong><p>The system shows messages when a search is successful, a book is pinned, or an error occurs.</p></div>
+              <div class="nfr-card"><strong>Error Prevention</strong><p>The system checks inputs and limits actions based on user roles to prevent mistakes.</p></div>
+            </div>
+
+            <h4>5.2 User Roles and Interface Access</h4>
+            <div class="role-table-wrap">
+              <table class="role-table">
+                <thead><tr><th>Role</th><th>Access</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="cred-label admin-badge">Admin / Librarian</span></td><td>Full access to dashboard, book search, pinned records, editing functions, and search history logs</td></tr>
+                  <tr><td><span class="cred-label asst-badge">Student Assistant</span></td><td>Access to book search, viewing results, and pinning records only</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>5.3 Screen Flow</h4>
+            <div class="two-col">
+              <div class="mini-card">
+                <strong>Admin / Librarian Flow</strong>
+                <ol class="manual-steps">
+                  <li>Login Page</li>
+                  <li>Home Page (Search)</li>
+                  <li>Search Results</li>
+                  <li>Book Information Page (View / Edit)</li>
+                  <li>Pinned Books Page</li>
+                  <li>Search History Logs (View / Edit)</li>
+                  <li>Profile Page → Logout</li>
+                </ol>
+              </div>
+              <div class="mini-card">
+                <strong>Student Assistant Flow</strong>
+                <ol class="manual-steps">
+                  <li>Login Page</li>
+                  <li>Home Page (Search)</li>
+                  <li>Search Results</li>
+                  <li>Book Information Page (View Only)</li>
+                  <li>Pinned Books Page</li>
+                  <li>Profile Page → Logout</li>
+                </ol>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- SECTION 7 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">6</span><h3>Design Constraints and Assumptions</h3></div>
+            <h4>6.1 Design Constraints</h4>
+            <ul class="manual-list">
+              <li><strong>Web-based desktop-only access:</strong> The client specified desktop-only use by librarians. Responsive mobile design was intentionally excluded to reduce complexity.</li>
+              <li><strong>Technology stack limitations:</strong> Constrained to Angular (frontend), Spring Boot (backend), and MySQL (database) as approved in the previous phase.</li>
+              <li><strong>API usage policies and scraping restrictions:</strong> Some external sources impose request limits or restrict web scraping. Official APIs are prioritized; web scraping is a last resort only when compliant with terms of service.</li>
+              <li><strong>Data integrity and academic use:</strong> Accuracy of bibliographic data is critical. This influenced the decision to prioritize authoritative sources such as the Library of Congress over commercial platforms.</li>
+              <li><strong>Limited development timeframe:</strong> Due to academic project deadlines, complex features such as machine learning recommendations or full-text indexing were excluded.</li>
+            </ul>
+            <h4>6.2 Design Assumptions</h4>
+            <ul class="manual-list">
+              <li>Librarians have basic computer literacy and are familiar with cataloging workflows.</li>
+              <li>A stable internet connection is available to access external APIs.</li>
+              <li>External APIs will continue to provide consistent data formats.</li>
+              <li>The volume of concurrent users is relatively low — intended for internal library staff use.</li>
+              <li>Security requirements are limited to authentication and controlled access, as no sensitive personal data is heavily processed.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 8 -->
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">7</span><h3>Design Readiness for Development</h3></div>
+            <h4>7.1 Alignment with Approved Requirements</h4>
+            <p>The system design directly supports the approved requirements by: allowing searches by ISBN, title, or author; automatically retrieving and organizing bibliographic information from trusted sources; generating Cutter Numbers internally; storing and retrieving book data efficiently using a relational database; and presenting results through a clear, structured web interface.</p>
+            <h4>7.2 Implementation Feasibility</h4>
+            <p>The layered architecture clearly separates responsibilities — Angular handles user interaction, Spring Boot manages business logic and API integration, and MySQL ensures persistent structured data storage. This separation allows developers to work on different components in parallel.</p>
+            <h4>7.3 Risks and Areas for Clarification</h4>
+            <ul class="manual-list">
+              <li>Final confirmation of API access limits and authentication requirements</li>
+              <li>Detailed rules for Cutter number generation</li>
+              <li>Error-handling behavior when all external data sources fail</li>
+              <li>Data update policies (when and how book data should be refreshed)</li>
+            </ul>
+            <div class="callout info"><strong>Overall Readiness:</strong> The system design is well-defined, feasible, and aligned with the project scope. The architecture, constraints, and assumptions have been carefully considered, making the design suitable to proceed to the development phase with minimal risk and clear implementation guidance.</div>
+          </div>
+
+        </div>
+
+        <!-- ======= DEMO VIDEO ======= -->
+        <div *ngIf="activeTab === 'demo'" class="manual-tab">
+
+          <div class="manual-banner">
+            <div class="manual-banner-text">
+              <h2>Demo Video</h2>
+              <p>Watch a walkthrough of the Cataloging Search Resources Platform</p>
+              <span class="manual-version">Mapúa University Library &nbsp;|&nbsp; ITS120L / BM3</span>
+            </div>
+            <a class="banner-drive-link" href="https://drive.google.com/drive/folders/1WaMm9XJdg9G8C6XGFRW_9_7NAOvP9Hbn" target="_blank">
+              <!-- <svg viewBox="0 0 24 24" class="drive-icon"><path d="M7.71 3.5L1.15 15l3.43 5.5h15.84L21 20.5 14.29 3.5H7.71zM14 13l-2 3.5L10 13l2-3.5 2 3.5zm-4.27-8h4.54L19.31 15h-3.43L14 13l-2 3.5L10 13 8.12 15H4.69L9.73 5z"/></svg> -->
+              <span class="drive-link-text">
+                <span class="drive-link-label">Complete Documentation</span>
+                <span class="drive-link-url">Google Drive — All Manuals &amp; Resources</span>
+              </span>
+              <svg viewBox="0 0 24 24" class="drive-arrow"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <div class="manual-section">
+            <div class="section-heading"><span class="section-num">▶</span><h3>Platform Walkthrough</h3></div>
+            <p>The video below demonstrates the key features of the system including searching for books, pinning records, editing bibliographic data, and managing search logs.</p>
+            <div class="video-wrapper">
+              <iframe
+              src="https://www.youtube.com/embed/qJCrmCfDF-E" 
+              title="Cataloging Search Resources Platform Demo"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <!-- <p class="note">Replace <code>YOUR_VIDEO_ID</code> in <code>help.html</code> with the actual YouTube video ID (the part after <code>?v=</code> in the YouTube URL).</p> -->
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

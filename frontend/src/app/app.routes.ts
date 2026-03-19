@@ -7,7 +7,12 @@ import { PinnedBooksComponent } from './pinned-books/pinned-books';
 import { SearchLogsComponent } from './search-logs/search-logs';
 import { LoginComponent } from './login/login';
 
+import { HelpComponent } from './help/Help';  // ← ADD THIS
+
 export const routes: Routes = [
+
+  // TEST NEW UI
+  { path: 'help', component: HelpComponent }, 
 
   // 🔐 LOGIN ROUTE
   { path: 'login', component: LoginComponent },
